@@ -1,0 +1,38 @@
+<html><head><title>New Project</title></head><body>
+<h1>New Project</h1>
+<div id="stage1">
+  <button id="addc" type="button">Add Content</button>
+  <div id="cmenu" role="menu" hidden><button role="menuitem" id="m-image" type="button">Image</button><button role="menuitem" id="m-text" type="button">Text</button></div>
+  <input type="file" id="imgfile" multiple hidden>
+  <div id="blocks"></div>
+  <div id="toolbar" hidden><button type="button" id="linkbtn" aria-label="Link">Link</button></div>
+  <div id="linkbox" hidden><input id="linkinput" placeholder="Paste or type a link"></div>
+  <button id="continue" type="button">Continue</button>
+</div>
+<div id="stage2" hidden>
+  <button id="cover" type="button">Upload a Cover</button><input type="file" id="coverfile" hidden><span id="covername"></span>
+  <label>Project Title<input id="ptitle" name="ptitle"></label>
+  <button role="combobox" id="field" type="button" aria-haspopup="listbox">Creative Fields</button>
+  <ul id="fieldlist" role="listbox" hidden><li role="option">Graphic Design</li><li role="option">Illustration</li></ul>
+  <input id="tags" placeholder="Add tags"><div id="chips"></div>
+  <button id="publish" type="button">Publish</button>
+</div>
+<script>
+const $ = id => document.getElementById(id); let saved = null, field = '', cover = '', imgs = 0;
+$('addc').onclick = () => $('cmenu').hidden = !$('cmenu').hidden;
+$('m-image').onclick = () => { $('imgfile').click(); $('cmenu').hidden = true; };
+$('imgfile').onchange = e => { for (const f of e.target.files) { imgs++; const d = document.createElement('div'); d.className = 'imgblock'; d.textContent = f.name; $('blocks').appendChild(d); } };
+$('m-text').onclick = () => { const d = document.createElement('div'); d.className = 'tb'; d.contentEditable = 'true'; d.setAttribute('role','textbox'); d.setAttribute('aria-label','Text block'); $('blocks').appendChild(d); d.focus(); $('cmenu').hidden = true; };
+document.addEventListener('selectionchange', () => { const s = getSelection(); const ok = s.rangeCount && !s.isCollapsed && s.anchorNode && s.anchorNode.parentElement && s.anchorNode.parentElement.closest('.tb'); if (ok) { saved = s.getRangeAt(0).cloneRange(); $('toolbar').hidden = false; } });
+$('linkbtn').onmousedown = e => e.preventDefault();
+$('linkbtn').onclick = () => { $('linkbox').hidden = false; $('linkinput').focus(); };
+$('linkinput').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); const ed = saved.startContainer.parentElement.closest('.tb'); ed.focus(); const s = getSelection(); s.removeAllRanges(); s.addRange(saved); document.execCommand('createLink', false, $('linkinput').value); $('linkbox').hidden = true; $('toolbar').hidden = true; } };
+$('continue').onclick = () => { $('stage1').hidden = true; $('stage2').hidden = false; };
+$('cover').onclick = () => $('coverfile').click();
+$('coverfile').onchange = e => { cover = e.target.files[0].name; $('covername').textContent = cover; };
+$('field').onclick = () => $('fieldlist').hidden = !$('fieldlist').hidden;
+document.querySelectorAll('#fieldlist li').forEach(li => li.onclick = () => { field = li.textContent; $('field').textContent = field; $('fieldlist').hidden = true; });
+const tags = []; $('tags').onkeydown = e => { if (e.key === 'Enter' && $('tags').value.trim()) { tags.push($('tags').value.trim()); $('chips').textContent = tags.join(' | '); $('tags').value = ''; } };
+$('publish').onclick = () => { const d = {t: $('ptitle').value, b: [...document.querySelectorAll('.tb')].map(x => x.innerHTML).join('<br>'), f: field, g: tags, c: cover, i: imgs};
+  location.href = '/b/project?d=' + encodeURIComponent(JSON.stringify(d)); };
+</script></body></html>

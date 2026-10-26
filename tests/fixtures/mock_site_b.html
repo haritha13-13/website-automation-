@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Site B - Compose</title></head>
+<body>
+<h1>Compose a post</h1>
+<form aria-label="Compose" onsubmit="return false">
+  <label for="subject">Post subject</label><input id="subject" name="post_subject" type="text">
+  <label for="msg">Message</label><textarea id="msg" name="post_message"></textarea>
+  <label for="topic">Topic</label><select id="topic" name="topic"><option value="">-</option><option>News</option><option>Technology</option></select>
+  <label for="kw">Keywords</label><input id="kw" name="keywords" type="text">
+  <label for="att">Attachment</label><input id="att" name="attachment" type="file">
+  <button type="button" id="b-draft">Store draft</button>
+  <button type="button" id="b-go">Go live</button>
+</form>
+<div id="msgbox"></div>
+<script>
+  document.getElementById('b-draft').onclick = () => document.getElementById('msgbox').textContent = 'Draft saved';
+  document.getElementById('b-go').onclick = () => document.getElementById('msgbox').textContent = 'Published successfully';
+</script>
+</body></html>

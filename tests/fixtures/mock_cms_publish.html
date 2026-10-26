@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Mock CMS - Editor</title></head>
+<body>
+<main>
+  <section id="editor">
+    <h1>New Article</h1>
+    <form id="article-form" aria-label="Article editor" onsubmit="return false">
+      <label for="headline">Article Title</label>
+      <input id="headline" name="headline" type="text">
+      <label id="body-label">Article Body</label>
+      <div id="article-body" contenteditable="true" role="textbox" aria-labelledby="body-label"></div>
+      <label for="category">Category</label>
+      <select id="category" name="category"><option value="">Choose...</option><option>News</option><option>Technology</option></select>
+      <label for="tags">Tags</label>
+      <input id="tags" name="tags" type="text">
+      <label for="cover">Cover Image</label>
+      <input id="cover" name="cover" type="file" accept="image/*" multiple>
+      <button type="button" id="save-draft">Save Draft</button>
+      <button type="button" id="publish">Publish</button>
+    </form>
+    <div id="error" role="alert" hidden></div>
+    <div id="status"></div>
+    <a id="article-link" href="#" hidden>View article</a>
+  </section>
+  <section id="view" hidden><h1 id="view-title"></h1><div id="view-body"></div></section>
+</main>
+<script>
+  // Behaves like a tiny CMS: validates, "saves", and exposes a viewable article URL.
+  const $ = id => document.getElementById(id);
+  function renderView() {
+    const m = location.hash.match(/^#article=(.*)$/);
+    if (!m) return;
+    const a = JSON.parse(decodeURIComponent(m[1]));
+    $('editor').hidden = true; $('view').hidden = false;
+    $('view-title').textContent = a.t; $('view-body').textContent = a.c;
+  }
+  function submit(mode) {
+    const title = $('headline').value.trim(), body = $('article-body').innerText.trim();
+    $('error').hidden = true; $('error').textContent = '';
+    if (!title || !body) { $('error').hidden = false; $('error').textContent = 'Title and body are required'; return; }
+    $('status').textContent = mode === 'publish' ? 'Published successfully' : 'Draft saved';
+    if (mode === 'publish') {
+      const url = location.href.split('#')[0] + '#article=' + encodeURIComponent(JSON.stringify({t: title, c: body}));
+      $('article-link').href = url; $('article-link').hidden = false;
+    }
+  }
+  $('save-draft').addEventListener('click', () => submit('draft'));
+  $('publish').addEventListener('click', () => submit('publish'));
+  window.addEventListener('hashchange', renderView); renderView();
+</script>
+</body></html>

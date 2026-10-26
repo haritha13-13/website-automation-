@@ -1,0 +1,290 @@
+{
+  "name": "behance_project",
+  "site": "behance.net",
+  "verified": false,
+  "description": "Behance project with a backlink, written from the owner's manual workflow (20 steps). NOT yet confirmed on the live site: names of buttons may need adjusting.",
+  "requires": [
+    "title",
+    "content",
+    "blog_url",
+    "anchor_text",
+    "images",
+    "cover_image",
+    "category",
+    "tags"
+  ],
+  "steps": [
+    {
+      "id": "share_your_work",
+      "title": "Click Share Your Work (step 4)",
+      "action": "click",
+      "target": {
+        "candidates": [
+          {
+            "role": "button",
+            "name": "Share Your Work"
+          },
+          {
+            "role": "link",
+            "name": "Share Your Work"
+          },
+          {
+            "text": "Share Your Work"
+          }
+        ]
+      }
+    },
+    {
+      "id": "choose_project",
+      "title": "Select Project (step 5)",
+      "action": "click",
+      "target": {
+        "candidates": [
+          {
+            "role": "menuitem",
+            "name": "Project"
+          },
+          {
+            "role": "link",
+            "name": "Project"
+          },
+          {
+            "role": "button",
+            "name": "Project"
+          },
+          {
+            "role": "option",
+            "name": "Project"
+          }
+        ]
+      }
+    },
+    {
+      "id": "add_content",
+      "title": "Click Add Content (step 6)",
+      "action": "click",
+      "target": {
+        "candidates": [
+          {
+            "role": "button",
+            "name": "Add Content"
+          },
+          {
+            "text": "Add Content"
+          }
+        ]
+      }
+    },
+    {
+      "id": "upload_images",
+      "title": "Upload the project images (step 7)",
+      "action": "upload",
+      "files": "{images}",
+      "target": {
+        "candidates": [
+          {
+            "role": "menuitem",
+            "name": "Image"
+          },
+          {
+            "role": "button",
+            "name": "Image"
+          },
+          {
+            "text": "Image"
+          },
+          {
+            "css": "input[type=file]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "add_text_menu",
+      "title": "Add Content again for a text block (step 8)",
+      "action": "click",
+      "optional": true,
+      "target": {
+        "candidates": [
+          {
+            "role": "button",
+            "name": "Add Content"
+          },
+          {
+            "text": "Add Content"
+          }
+        ]
+      }
+    },
+    {
+      "id": "choose_text",
+      "title": "Choose the text block (step 8)",
+      "action": "click",
+      "target": {
+        "candidates": [
+          {
+            "role": "menuitem",
+            "name": "Text"
+          },
+          {
+            "role": "button",
+            "name": "Text"
+          },
+          {
+            "text": "Text"
+          }
+        ]
+      }
+    },
+    {
+      "id": "type_description",
+      "title": "Enter the project description (step 8)",
+      "action": "type_text",
+      "value": "{content}"
+    },
+    {
+      "id": "link_anchor",
+      "title": "Select the anchor text and add the blog link (steps 9-10)",
+      "action": "link_selection",
+      "text": "{anchor_text}",
+      "url": "{blog_url}"
+    },
+    {
+      "id": "continue",
+      "title": "Click Continue (step 11)",
+      "action": "click",
+      "target": {
+        "candidates": [
+          {
+            "role": "button",
+            "name": "Continue"
+          },
+          {
+            "role": "link",
+            "name": "Continue"
+          },
+          {
+            "text": "Continue"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cover_image",
+      "title": "Upload the cover image (step 12)",
+      "action": "upload",
+      "files": "{cover_image_files}",
+      "target": {
+        "candidates": [
+          {
+            "role": "button",
+            "name": "Upload a Cover"
+          },
+          {
+            "role": "button",
+            "name": "Upload Cover"
+          },
+          {
+            "text": "Upload a Cover"
+          },
+          {
+            "text": "Cover"
+          },
+          {
+            "css": "input[type=file]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "project_title",
+      "title": "Enter the project title (step 13)",
+      "action": "fill",
+      "value": "{title}",
+      "target": {
+        "candidates": [
+          {
+            "label": "Project Title"
+          },
+          {
+            "placeholder": "Title"
+          },
+          {
+            "role": "textbox",
+            "name": "Title"
+          },
+          {
+            "label": "Title"
+          }
+        ]
+      }
+    },
+    {
+      "id": "creative_field",
+      "title": "Select the Creative Field (step 14)",
+      "action": "select",
+      "value": "{category}",
+      "target": {
+        "candidates": [
+          {
+            "role": "combobox",
+            "name": "Creative Field"
+          },
+          {
+            "role": "button",
+            "name": "Creative Field"
+          },
+          {
+            "label": "Creative Fields"
+          },
+          {
+            "placeholder": "Creative Field"
+          },
+          {
+            "text": "Creative Fields"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tags",
+      "title": "Add the tags (step 15)",
+      "action": "add_tags",
+      "value": "{tags}",
+      "target": {
+        "candidates": [
+          {
+            "placeholder": "Add tags"
+          },
+          {
+            "label": "Tags"
+          },
+          {
+            "role": "textbox",
+            "name": "Tags"
+          },
+          {
+            "placeholder": "Tags"
+          }
+        ]
+      }
+    },
+    {
+      "id": "review_and_publish",
+      "title": "You review and click Publish yourself (steps 16-17)",
+      "action": "wait_user",
+      "modes": [
+        "publish"
+      ],
+      "message": "Review the project in the browser. When it looks right, click PUBLISH yourself."
+    },
+    {
+      "id": "open_project",
+      "title": "Record the published project address (steps 18, 20)",
+      "action": "capture_url",
+      "modes": [
+        "publish"
+      ]
+    }
+  ]
+}

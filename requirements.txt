@@ -1,0 +1,8 @@
+crewai==1.15.28
+playwright==1.64.0
+pydantic>=2.12,<3
+python-dotenv==1.2.4
+httpx==0.28.1
+pytest==9.1.1
+pandas==3.0.6
+openpyxl==3.1.5

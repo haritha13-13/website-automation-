@@ -1,0 +1,4 @@
+<html><head><title>Project</title></head><body><h1 id="t"></h1><div id="body"></div><p id="meta"></p>
+<script>const d = JSON.parse(new URLSearchParams(location.search).get('d') || '{}');
+document.title = d.t || 'Project'; document.getElementById('t').textContent = d.t || '';
+document.getElementById('body').innerHTML = d.b || ''; document.getElementById('meta').textContent = 'Field: ' + (d.f||'') + ' Tags: ' + (d.g||[]).join(', ') + ' Cover: ' + (d.c||'') + ' Images: ' + (d.i||0);</script></body></html>

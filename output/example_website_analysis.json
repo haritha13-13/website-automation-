@@ -1,0 +1,118 @@
+{
+  "url": "file:///.../tests/fixtures/mock_cms.html",
+  "page_title": "Mock CMS - New Article",
+  "analyzed_at": "2026-10-22T04:50:01+00:00",
+  "status": "COMPLETED",
+  "ai_proposal": {
+    "website_type": "custom_cms",
+    "page_type": "article_editor",
+    "fields": {
+      "title": {
+        "selector": "#headline",
+        "confidence": 0.98,
+        "reason": null
+      },
+      "content": {
+        "selector": "#article-body",
+        "confidence": 0.95,
+        "reason": null
+      },
+      "category": {
+        "selector": "select[name='category']",
+        "confidence": 0.91,
+        "reason": null
+      },
+      "tags": {
+        "selector": "#tags",
+        "confidence": 0.8,
+        "reason": null
+      },
+      "image": {
+        "selector": "input[type='file']",
+        "confidence": 0.96,
+        "reason": null
+      }
+    },
+    "actions": {
+      "save_draft": {
+        "selector": "button:has-text('Save Draft')",
+        "reason": null
+      },
+      "publish": {
+        "selector": "button:has-text('Publish')",
+        "reason": null
+      }
+    },
+    "missing_fields": [],
+    "requires_human_review": false,
+    "next_step_suggestion": null
+  },
+  "browser_validation": [
+    {
+      "name": "title",
+      "selector": "#headline",
+      "status": "PASS",
+      "match_count": 1,
+      "visible": true,
+      "interactable": true,
+      "notes": []
+    },
+    {
+      "name": "content",
+      "selector": "#article-body",
+      "status": "PASS",
+      "match_count": 1,
+      "visible": true,
+      "interactable": true,
+      "notes": []
+    },
+    {
+      "name": "category",
+      "selector": "select[name='category']",
+      "status": "PASS",
+      "match_count": 1,
+      "visible": true,
+      "interactable": true,
+      "notes": []
+    },
+    {
+      "name": "tags",
+      "selector": "#tags",
+      "status": "PASS",
+      "match_count": 1,
+      "visible": true,
+      "interactable": true,
+      "notes": []
+    },
+    {
+      "name": "image",
+      "selector": "input[type='file']",
+      "status": "PASS",
+      "match_count": 1,
+      "visible": true,
+      "interactable": true,
+      "notes": []
+    },
+    {
+      "name": "save_draft",
+      "selector": "button:has-text('Save Draft')",
+      "status": "PASS",
+      "match_count": 1,
+      "visible": true,
+      "interactable": true,
+      "notes": []
+    },
+    {
+      "name": "publish",
+      "selector": "button:has-text('Publish')",
+      "status": "PASS",
+      "match_count": 1,
+      "visible": true,
+      "interactable": true,
+      "notes": []
+    }
+  ],
+  "observed_element_count": 8,
+  "screenshot": "screenshots/website_analysis.png",
+  "note": "ai_proposal is model-generated; confidence values are model estimates."
+}

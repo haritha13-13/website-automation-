@@ -1,0 +1,20 @@
+{
+  "name": "mock_cms",
+  "website_type": "custom_cms",
+  "url_contains": ["mock_cms"],
+  "fields": {
+    "title": "#headline",
+    "content": "#article-body",
+    "category": "#category",
+    "tags": "#tags",
+    "images": "#cover"
+  },
+  "actions": {"save_draft": "#save-draft", "publish": "#publish"},
+  "tags_mode": "comma",
+  "success": {
+    "draft_text": "Draft saved",
+    "published_text": "Published successfully",
+    "error_selector": "#error",
+    "article_link_selector": "#article-link"
+  }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Mock CMS - New Article</title>
+<style>#late{display:block}.hidden-field{display:none}</style></head>
+<body>
+<nav><a href="/admin/posts?token=abc123">Posts</a> <a href="/admin/media">Media</a></nav>
+<main>
+  <h1>New Article</h1>
+  <form id="article-form" aria-label="Article editor">
+    <label for="headline">Article Title</label>
+    <input id="headline" name="headline" type="text" placeholder="Enter headline" value="SECRET-VALUE-SHOULD-NOT-LEAK">
+
+    <label id="body-label">Article Body</label>
+    <div id="article-body" contenteditable="true" role="textbox" aria-labelledby="body-label"></div>
+
+    <label for="category">Category</label>
+    <select id="category" name="category">
+      <option value="">Choose...</option><option value="news">News</option><option value="tech">Tech</option>
+    </select>
+
+    <label for="tags">Tags</label>
+    <input id="tags" name="tags" type="text" placeholder="comma separated">
+
+    <label for="cover">Cover Image</label>
+    <input id="cover" name="cover" type="file" accept="image/*">
+
+    <input type="hidden" name="csrf_token" value="TOPSECRET">
+    <button type="button" id="save-draft">Save Draft</button>
+    <button type="button" id="publish">Publish</button>
+  </form>
+  <div id="late-host"></div>
+</main>
+<script>
+  // Dynamically rendered control, to exercise wait handling.
+  setTimeout(() => {
+    const b = document.createElement('button'); b.type = 'button'; b.id = 'preview'; b.textContent = 'Preview';
+    document.getElementById('late-host').appendChild(b);
+  }, 400);
+</script>
+</body></html>
